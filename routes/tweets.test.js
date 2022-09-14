@@ -62,7 +62,7 @@ describe('tweets endpoints', () => {
     });
 
      //----------------read tweet : no records with username------------------
-     test("POST /read : create tweet", async () => {
+     test("get /read : create tweet", async () => {
         let mockUser = [];
         const mock = jest.spyOn(Tweets, 'find');
         mock.mockReturnValue(mockUser);
@@ -81,4 +81,5 @@ describe('tweets endpoints', () => {
         expect(response.statusCode).toBe(201)
         expect(response.text).toBe('no tweets found');
     });
+
 })

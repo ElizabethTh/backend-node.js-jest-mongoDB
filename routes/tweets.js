@@ -1,4 +1,5 @@
 const { Tweets } = require('../models/tweets');
+const { ObjectId } = require('mongodb');
 const express = require('express');
 const e = require('express');
 const app = express();
@@ -41,7 +42,7 @@ app.get('/read', async (req, res) => {
 
 
 // --------------updates tweets api---------------------------
-app.get('/update', async (req, res) => {
+app.put('/update', async (req, res) => {
     try {
         var data = { $set: { tweet: req.body.tweet } }
         Tweets.updateOne({ _id: req.body.userId }, data, (err, collection) => {
@@ -57,16 +58,19 @@ app.get('/update', async (req, res) => {
 });
 
 // --------------delete tweets api---------------------------
-app.get('/delete', async (req, res) => {
+app.delete('/delete', async (req, res) => {
     try {
         Tweets.deleteOne({ _id: req.body.userId }, (err, collection) => {
             if (err) {
+                console.log('hereeeee')
                 res.status(400).send('No records to delete with userId');
             } else {
+                console.log('or hereeeee')
                 res.status(201).send('Tweet deleted!');
             }
         });
     } catch (err) {
+        console.log('edvolddsvs')
         res.status(400).send('Error found');
     }
 });
